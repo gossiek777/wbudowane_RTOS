@@ -10,7 +10,7 @@
 #define QUEUE_LENGTH 		25
 #define QUEUE_ITEM_SIZE sizeof(struct ServoMsg)
 
-QueueHandle_t xServoQueue;
+QueueHandle_t xQueue;
 extern TaskHandle_t xHandle;
 
 enum ServoStateCmd {CAL, GO_TO, WAIT, SPEED};
@@ -55,7 +55,7 @@ void Automat(void *pvParameters){
 		
 		switch(sServo.eState){
 			case IDLE:
-				if(xQueueReceive(xServoQueue, &sServoMsg, portMAX_DELAY) == pdPASS){
+				if(xQueueReceive(xQueue, &sServoMsg, portMAX_DELAY) == pdPASS){
 					switch(sServoMsg.eStateCmd){
 						case(GO_TO):
 							sServo.uiDesiredPosition=sServoMsg.uiArgumentValue;
@@ -106,7 +106,7 @@ void Automat(void *pvParameters){
 
 void ServoInit(){
 	xTaskCreate(Automat, NULL, 512, NULL, 3, NULL);
-	xServoQueue = xQueueCreate(QUEUE_LENGTH, QUEUE_ITEM_SIZE);
+	xQueue = xQueueCreate(QUEUE_LENGTH, QUEUE_ITEM_SIZE);
 	Led_Init();
 	DetectorInit();
 }
@@ -115,26 +115,26 @@ void ServoCallib(void){
 	struct ServoMsg sServoCallib;
 	sServoCallib.eStateCmd = CAL;
 	sServoCallib.uiArgumentValue = 0;
-	xQueueSendToBack(xServoQueue,&sServoCallib,2);
+	xQueueSendToBack(xQueue,&sServoCallib,2);
 }
 
 void ServoGoTo(unsigned int uiPosition){
 	struct ServoMsg sServoGoTo;
 	sServoGoTo.eStateCmd=GO_TO;
 	sServoGoTo.uiArgumentValue = uiPosition;
-	xQueueSendToBack(xServoQueue,&sServoGoTo,10);
+	xQueueSendToBack(xQueue,&sServoGoTo,10);
 }
 
 void ServoWait(unsigned int uiTicks){
 	struct ServoMsg sServoWait;
 	sServoWait.eStateCmd=WAIT;
 	sServoWait.uiArgumentValue = uiTicks;
-	xQueueSendToBack(xServoQueue,&sServoWait,10);
+	xQueueSendToBack(xQueue,&sServoWait,10);
 }
 
 void ServoSpeed(unsigned int uiTicksPerStep){
 	struct ServoMsg sServoSpeed;
 	sServoSpeed.eStateCmd=SPEED;
 	sServoSpeed.uiArgumentValue = uiTicksPerStep;
-	xQueueSendToBack(xServoQueue,&sServoSpeed,10);
+	xQueueSendToBack(xQueue,&sServoSpeed,10);
 }
