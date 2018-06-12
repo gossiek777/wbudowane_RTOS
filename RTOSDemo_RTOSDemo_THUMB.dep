@@ -1,33 +1,88 @@
 Dependencies for Project 'RTOSDemo', Target 'RTOSDemo_THUMB': (DO NOT MODIFY !)
-F (.\Startup.s)(0x582CEC7C)(--cpu ARM7TDMI --pd "__EVAL SETA 1" -g --apcs=interwork -I..\..\Source\portable\RVDS\ARM7_LPC21xx-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips--list .\startup.lst --xref -o .\bin\startup.o --depend .\bin\startup.d)
-F (.\main.c)(0x5B1A3EA2)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\main.o --omf_browse .\bin\main.crf --depend .\bin\main.d)
-F (.\led.c)(0x5B17F9FB)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\led.o --omf_browse .\bin\led.crf --depend .\bin\led.d)
+F (.\Startup.s)(0x5B1FDA06)(--cpu ARM7TDMI --pd "__EVAL SETA 1" -g --apcs=interwork -I..\..\Source\portable\RVDS\ARM7_LPC21xx-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips--list .\startup.lst --xref -o .\bin\startup.o --depend .\bin\startup.d)
+F (.\main.c)(0x5B1FDA06)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\main.o --omf_browse .\bin\main.crf --depend .\bin\main.d)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\FreeRTOS.h)(0x5A3850E8)
+I (C:\Keil\ARM\ARMCC\include\stddef.h)(0x51C819B4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C819B4)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\FreeRTOSConfig.h)(0x5B1FDA06)
+I (C:\Keil\ARM\Inc\Philips\lpc21xx.h)(0x51C81BAC)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\projdefs.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\portable.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\deprecated_definitions.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\portable\RVDS\ARM7_LPC21xx\portmacro.h)(0x5A3850EA)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\mpu_wrappers.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\task.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\list.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\keyboard.h)(0x5B1FDA06)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\led.h)(0x5B1FDA06)
+F (.\led.c)(0x5B1FDA06)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\led.o --omf_browse .\bin\led.crf --depend .\bin\led.d)
 I (C:\Keil\ARM\Inc\Philips\LPC21xx.H)(0x51C81BAC)
-I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\ARM7_LPC2129_Keil_RVDS_cz3\led.h)(0x5B17F9F2)
-F (.\string.c)(0x5A33238A)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\string.o --omf_browse .\bin\string.crf --depend .\bin\string.d)
-I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\ARM7_LPC2129_Keil_RVDS_cz3\string.h)(0x5A3377DE)
-F (.\uart.c)(0x5B1857AA)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\uart.o --omf_browse .\bin\uart.crf --depend .\bin\uart.d)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\led.h)(0x5B1FDA06)
+F (.\string.c)(0x5B1FDA07)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\string.o --omf_browse .\bin\string.crf --depend .\bin\string.d)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\string.h)(0x5B1FDA07)
+F (.\uart.c)(0x5B1FDA07)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\uart.o --omf_browse .\bin\uart.crf --depend .\bin\uart.d)
 I (C:\Keil\ARM\Inc\Philips\LPC210X.H)(0x51C81BAC)
-I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\ARM7_LPC2129_Keil_RVDS_cz3\uart.h)(0x5A3381FB)
-I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\ARM7_LPC2129_Keil_RVDS_cz3\string.h)(0x5A3377DE)
-F (.\keyboard.c)(0x5B1FA0B2)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\keyboard.o --omf_browse .\bin\keyboard.crf --depend .\bin\keyboard.d)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\uart.h)(0x5B1FDA07)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\string.h)(0x5B1FDA07)
+F (.\keyboard.c)(0x5B1FE10E)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\keyboard.o --omf_browse .\bin\keyboard.crf --depend .\bin\keyboard.d)
 I (C:\Keil\ARM\Inc\Philips\LPC21xx.H)(0x51C81BAC)
-I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\ARM7_LPC2129_Keil_RVDS_cz3\keyboard.h)(0x5B1F9A6F)
-F (.\servo.c)(0x5B1A3FF5)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\servo.o --omf_browse .\bin\servo.crf --depend .\bin\servo.d)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\keyboard.h)(0x5B1FDA06)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\FreeRTOS.h)(0x5A3850E8)
+I (C:\Keil\ARM\ARMCC\include\stddef.h)(0x51C819B4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C819B4)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\FreeRTOSConfig.h)(0x5B1FDA06)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\projdefs.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\portable.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\deprecated_definitions.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\portable\RVDS\ARM7_LPC21xx\portmacro.h)(0x5A3850EA)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\mpu_wrappers.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\queue.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\task.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\list.h)(0x5A3850E8)
+F (.\servo.c)(0x5B1FDA07)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\servo.o --omf_browse .\bin\servo.crf --depend .\bin\servo.d)
 I (C:\Keil\ARM\Inc\Philips\LPC21xx.H)(0x51C81BAC)
-I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\ARM7_LPC2129_Keil_RVDS_cz3\servo.h)(0x5B1A38E8)
-I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\ARM7_LPC2129_Keil_RVDS_cz3\led.h)(0x5B17F9F2)
-I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\ARM7_LPC2129_Keil_RVDS_cz3\timer_interrupts.h)(0x5B19A420)
-F (.\timer_interrupts.c)(0x5B19A3D3)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\timer_interrupts.o --omf_browse .\bin\timer_interrupts.crf --depend .\bin\timer_interrupts.d)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\servo.h)(0x5B1FDA07)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\led.h)(0x5B1FDA06)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\timer_interrupts.h)(0x5B1FDA07)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\FreeRTOS.h)(0x5A3850E8)
+I (C:\Keil\ARM\ARMCC\include\stddef.h)(0x51C819B4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C819B4)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\FreeRTOSConfig.h)(0x5B1FDA06)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\projdefs.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\portable.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\deprecated_definitions.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\portable\RVDS\ARM7_LPC21xx\portmacro.h)(0x5A3850EA)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\mpu_wrappers.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\task.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\list.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\queue.h)(0x5A3850E8)
+F (.\timer_interrupts.c)(0x5B1FDA07)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\timer_interrupts.o --omf_browse .\bin\timer_interrupts.crf --depend .\bin\timer_interrupts.d)
 I (C:\Keil\ARM\Inc\Philips\LPC21xx.H)(0x51C81BAC)
-I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\ARM7_LPC2129_Keil_RVDS_cz3\timer_interrupts.h)(0x5B19A420)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\timer_interrupts.h)(0x5B1FDA07)
+F (.\watch.c)(0x5B203193)()
 F (..\..\Source\tasks.c)(0x5A3850EA)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\tasks.o --omf_browse .\bin\tasks.crf --depend .\bin\tasks.d)
+I (C:\Keil\ARM\ARMCC\include\stdlib.h)(0x51C819B4)
+I (C:\Keil\ARM\ARMCC\include\string.h)(0x51C819B4)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\FreeRTOS.h)(0x5A3850E8)
+I (C:\Keil\ARM\ARMCC\include\stddef.h)(0x51C819B4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C819B4)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\FreeRTOSConfig.h)(0x5B1FDA06)
+I (C:\Keil\ARM\Inc\Philips\lpc21xx.h)(0x51C81BAC)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\projdefs.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\portable.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\deprecated_definitions.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\portable\RVDS\ARM7_LPC21xx\portmacro.h)(0x5A3850EA)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\mpu_wrappers.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\task.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\list.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\timers.h)(0x5A3850E8)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\stack_macros.h)(0x5A3850E8)
 F (..\..\Source\list.c)(0x5A3850E8)(--thumb -c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I. -I..\..\Source\portable\RVDS\ARM7_LPC21xx -I..\Common\include -I..\..\Source\include-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-DARM7_LPC21xx_KEIL_RVDS -DKEIL_THUMB_INTERWORK -o .\bin\list.o --omf_browse .\bin\list.crf --depend .\bin\list.d)
 I (C:\Keil\ARM\ARMCC\include\stdlib.h)(0x51C819B4)
 I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\FreeRTOS.h)(0x5A3850E8)
 I (C:\Keil\ARM\ARMCC\include\stddef.h)(0x51C819B4)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C819B4)
-I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\ARM7_LPC2129_Keil_RVDS_cz3\FreeRTOSConfig.h)(0x5B1A344D)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\FreeRTOSConfig.h)(0x5B1FDA06)
 I (C:\Keil\ARM\Inc\Philips\lpc21xx.h)(0x51C81BAC)
 I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\projdefs.h)(0x5A3850E8)
 I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\portable.h)(0x5A3850E8)
@@ -41,7 +96,7 @@ I (C:\Keil\ARM\ARMCC\include\string.h)(0x51C819B4)
 I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\FreeRTOS.h)(0x5A3850E8)
 I (C:\Keil\ARM\ARMCC\include\stddef.h)(0x51C819B4)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C819B4)
-I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\ARM7_LPC2129_Keil_RVDS_cz3\FreeRTOSConfig.h)(0x5B1A344D)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\FreeRTOSConfig.h)(0x5B1FDA06)
 I (C:\Keil\ARM\Inc\Philips\lpc21xx.h)(0x51C81BAC)
 I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\projdefs.h)(0x5A3850E8)
 I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\portable.h)(0x5A3850E8)
@@ -56,7 +111,7 @@ I (C:\Keil\ARM\ARMCC\include\stdlib.h)(0x51C819B4)
 I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\FreeRTOS.h)(0x5A3850E8)
 I (C:\Keil\ARM\ARMCC\include\stddef.h)(0x51C819B4)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C819B4)
-I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\ARM7_LPC2129_Keil_RVDS_cz3\FreeRTOSConfig.h)(0x5B1A344D)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\FreeRTOSConfig.h)(0x5B1FDA06)
 I (C:\Keil\ARM\Inc\Philips\lpc21xx.h)(0x51C81BAC)
 I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\projdefs.h)(0x5A3850E8)
 I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\portable.h)(0x5A3850E8)
@@ -70,7 +125,7 @@ I (C:\Keil\ARM\ARMCC\include\stdlib.h)(0x51C819B4)
 I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\FreeRTOS.h)(0x5A3850E8)
 I (C:\Keil\ARM\ARMCC\include\stddef.h)(0x51C819B4)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C819B4)
-I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\ARM7_LPC2129_Keil_RVDS_cz3\FreeRTOSConfig.h)(0x5B1A344D)
+I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Demo\RTOS_cz3\FreeRTOSConfig.h)(0x5B1FDA06)
 I (C:\Keil\ARM\Inc\Philips\lpc21xx.h)(0x51C81BAC)
 I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\projdefs.h)(0x5A3850E8)
 I (C:\Users\Gosia\Desktop\MTM\wbudowane\RTOS\FreeRTOSv10.0.1_ok\FreeRTOS\Source\include\portable.h)(0x5A3850E8)

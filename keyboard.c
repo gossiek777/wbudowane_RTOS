@@ -17,21 +17,35 @@
 QueueHandle_t xButtonQueue;
 
 enum ButtonState eReadButtons(void){
+	enum ButtonState eCurrentButton;
+	enum ButtonState ePreviousButton = RELASED;
 	if (0 == (IO0PIN & BUTTON0_bm )){
-		return (BUTTON_0);
+		eCurrentButton = BUTTON_0;
 	}
 	else if (0 == (IO0PIN & BUTTON1_bm )){
-		return (BUTTON_1);
+		eCurrentButton = BUTTON_1;
 	}
 	else if (0 == (IO0PIN & BUTTON2_bm )){
-		return (BUTTON_2);
+		eCurrentButton = BUTTON_2;
 	}
 	else if (0 == (IO0PIN & BUTTON3_bm )){
-		return (BUTTON_3);
+		eCurrentButton = BUTTON_3;
 	}
-	else
-		return (RELASED);
+	else{
+		eCurrentButton = RELASED;
+	}
+	
+	if (eCurrentButton != ePreviousButton){
+		ePreviousButton=eCurrentButton;
+		return eCurrentButton;
+	}
+	else{
+		ePreviousButton=eCurrentButton;
+		return RELASED;
+	}
+	
 }
+
 
 void Keyboard_Thread(void *pvParameters){
 	enum ButtonState ePressedButton;
