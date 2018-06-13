@@ -111,6 +111,7 @@ void UART_InitWithInt(unsigned int uiBaudRate){
 
 }
 */
+
 void Reciever_PutCharacterToBuffer(char cCharacter){
 	if (sBuffer.ucCharCtr < RECIEVER_SIZE){	
 		if (cCharacter != TERMINATOR){

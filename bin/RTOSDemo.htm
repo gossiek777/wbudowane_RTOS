@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\bin\RTOSDemo.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\bin\RTOSDemo.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Fri Jun 08 20:53:05 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Wed Jun 13 20:20:51 2018
 <BR><P>
 <H3>Maximum Stack Usage =        144 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -188,12 +188,13 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
 </UL>
 
-<P><STRONG><a name="[c]"></a>UartRx</STRONG> (Thumb, 28 bytes, Stack size 24 bytes, main.o(.text))
+<P><STRONG><a name="[c]"></a>UartRx</STRONG> (Thumb, 40 bytes, Stack size 24 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = UartRx &rArr; Uart_GetStringCopy
 </UL>
 <BR>[Calls]<UL><LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;eUartRx_GetStatus
-<LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_GetStringCopy
-<LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_Toggle
+<LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_GetStringCopy
+<LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_On
+<LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_Off
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
 </UL>
@@ -201,46 +202,47 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
 <LI>Call Chain = main &rArr; vTaskStartScheduler &rArr; xTaskCreate &rArr; pvPortMalloc &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
-<BR>[Calls]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
-<LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskStartScheduler
-<LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_InitWithInt
-<LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_Init
+<BR>[Calls]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
+<LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskStartScheduler
+<LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_InitWithInt
+<LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_Init
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rtentry2.o(.ARM.Collect$$rtentry$$0000000D)
 </UL>
-<P><STRONG><a name="[24]"></a>Led_Init</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, led.o(.text))
+<P><STRONG><a name="[25]"></a>Led_Init</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, led.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[29]"></a>Led_On</STRONG> (Thumb, 72 bytes, Stack size 0 bytes, led.o(.text), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_Step
+<P><STRONG><a name="[24]"></a>Led_On</STRONG> (Thumb, 72 bytes, Stack size 0 bytes, led.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_Step
+<LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartRx
 </UL>
 
-<P><STRONG><a name="[90]"></a>Led_Off</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, led.o(.text), UNUSED)
+<P><STRONG><a name="[22]"></a>Led_Off</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, led.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartRx
+</UL>
 
-<P><STRONG><a name="[28]"></a>Led_Step</STRONG> (Thumb, 46 bytes, Stack size 4 bytes, led.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_On
+<P><STRONG><a name="[29]"></a>Led_Step</STRONG> (Thumb, 46 bytes, Stack size 4 bytes, led.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_On
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_StepRight
 <LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_StepLeft
 </UL>
 
 <P><STRONG><a name="[2a]"></a>Led_StepLeft</STRONG> (Thumb, 12 bytes, Stack size 4 bytes, led.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_Step
+<BR><BR>[Calls]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_Step
 </UL>
 
 <P><STRONG><a name="[2b]"></a>Led_StepRight</STRONG> (Thumb, 12 bytes, Stack size 4 bytes, led.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_Step
+<BR><BR>[Calls]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_Step
 </UL>
 
-<P><STRONG><a name="[23]"></a>Led_Toggle</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, led.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartRx
-</UL>
+<P><STRONG><a name="[90]"></a>Led_Toggle</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, led.o(.text), UNUSED)
 
 <P><STRONG><a name="[2d]"></a>CopyString</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, string.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Transmiter_SendString
 <LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppendString
-<LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_GetStringCopy
+<LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_GetStringCopy
 </UL>
 
 <P><STRONG><a name="[91]"></a>eCompareString</STRONG> (Thumb, 58 bytes, Stack size 4 bytes, string.o(.text), UNUSED)
@@ -270,7 +272,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART0_Interrupt (via Veneer)
 </UL>
 
-<P><STRONG><a name="[25]"></a>UART_InitWithInt</STRONG> (Thumb, 94 bytes, Stack size 8 bytes, uart.o(.text))
+<P><STRONG><a name="[26]"></a>UART_InitWithInt</STRONG> (Thumb, 94 bytes, Stack size 8 bytes, uart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
 <LI>Call Chain = UART_InitWithInt
 </UL>
@@ -283,7 +285,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartRx
 </UL>
 
-<P><STRONG><a name="[22]"></a>Uart_GetStringCopy</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, uart.o(.text))
+<P><STRONG><a name="[23]"></a>Uart_GetStringCopy</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, uart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Uart_GetStringCopy
 </UL>
 <BR>[Calls]<UL><LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CopyString
@@ -306,7 +308,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> uart.o(.text)
 </UL>
-<P><STRONG><a name="[26]"></a>xTaskCreate</STRONG> (Thumb, 96 bytes, Stack size 56 bytes, tasks.o(.text))
+<P><STRONG><a name="[27]"></a>xTaskCreate</STRONG> (Thumb, 96 bytes, Stack size 56 bytes, tasks.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120 + Unknown Stack Size
 <LI>Call Chain = xTaskCreate &rArr; pvPortMalloc &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
@@ -315,7 +317,7 @@ Global Symbols
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvInitialiseNewTask
 <LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvAddNewTaskToReadyList
 </UL>
-<BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskStartScheduler
+<BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskStartScheduler
 <LI><a href="#[b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -424,13 +426,13 @@ Global Symbols
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvTaskIsTaskSuspended
 </UL>
 
-<P><STRONG><a name="[27]"></a>vTaskStartScheduler</STRONG> (Thumb, 60 bytes, Stack size 16 bytes, tasks.o(.text))
+<P><STRONG><a name="[28]"></a>vTaskStartScheduler</STRONG> (Thumb, 60 bytes, Stack size 16 bytes, tasks.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
 <LI>Call Chain = vTaskStartScheduler &rArr; xTaskCreate &rArr; pvPortMalloc &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xPortStartScheduler
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_common_disable_irq (via Veneer)
-<LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
+<LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -590,7 +592,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortStartFirstTask (via Veneer)
 <LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvSetupTimerInterrupt
 </UL>
-<BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskStartScheduler
+<BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskStartScheduler
 </UL>
 
 <P><STRONG><a name="[54]"></a>vPortEndScheduler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, port.o(.text), UNUSED)
@@ -649,7 +651,7 @@ Global Symbols
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskSuspendAll
 <LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskResumeAll
 </UL>
-<BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
+<BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
 </UL>
 
 <P><STRONG><a name="[3f]"></a>vPortFree</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, heap_2.o(.text))
@@ -660,7 +662,7 @@ Global Symbols
 <LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskResumeAll
 </UL>
 <BR>[Called By]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvDeleteTCB
-<LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
+<LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
 </UL>
 
 <P><STRONG><a name="[9b]"></a>xPortGetFreeHeapSize</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, heap_2.o(.text), UNUSED)
@@ -720,7 +722,7 @@ Global Symbols
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__arm_div5
 <LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__arm_div8
 </UL>
-<BR>[Called By]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_InitWithInt (via Veneer)
+<BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_InitWithInt (via Veneer)
 </UL>
 
 <P><STRONG><a name="[65]"></a>vPortStartFirstTask</STRONG> (ARM, 0 bytes, Stack size unknown bytes, portasm.o(PORT_ASM))
@@ -751,7 +753,7 @@ Global Symbols
 <P><STRONG><a name="[51]"></a>__ARM_common_disable_irq</STRONG> (ARM, 20 bytes, Stack size 0 bytes, tasks.o(i.__ARM_common_disable_irq))
 <BR><BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortEnterCritical (via Veneer)
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskEndScheduler (via Veneer)
-<LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskStartScheduler (via Veneer)
+<LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskStartScheduler (via Veneer)
 </UL>
 
 <P><STRONG><a name="[66]"></a>__ARM_common_enable_irq</STRONG> (ARM, 16 bytes, Stack size 0 bytes, port.o(i.__ARM_common_enable_irq))
@@ -819,7 +821,7 @@ Local Symbols
 <LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vListInsertEnd
 <LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvInitialiseTaskLists
 </UL>
-<BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
+<BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
 </UL>
 
 <P><STRONG><a name="[3b]"></a>prvInitialiseNewTask</STRONG> (Thumb, 136 bytes, Stack size 40 bytes, tasks.o(.text))
@@ -828,7 +830,7 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vListInitialiseItem
 <LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pxPortInitialiseStack
 </UL>
-<BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
+<BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
 </UL>
 
 <P><STRONG><a name="[43]"></a>prvResetNextTaskUnblockTime</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, tasks.o(.text))

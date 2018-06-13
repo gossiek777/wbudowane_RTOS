@@ -6,9 +6,12 @@
 void UartRx( void *pvParameters ){
 	char acBuffer[UART_RX_BUFFER_SIZE];
 	while(1){
-		while (eUartRx_GetStatus()==EMPTY){};
+		enum eRecieverStatus eStatus = eUartRx_GetStatus();
+		while (eUartRx_GetStatus()==EMPTY){
+			Led_Off();
+		};
 		Uart_GetStringCopy(acBuffer);
-		Led_Toggle(0);
+		Led_On(0);
 	}
 }
 int main( void ){
