@@ -2,7 +2,7 @@ enum TimeUnit {SECONDS, MINUTES};
 
 struct WatchEvent {
 	enum TimeUnit eTimeUnit;
-	char TmeValue;
+	char TimeValue;
 };
 
 void Watch_Init(void);

@@ -33,11 +33,11 @@ void Watch_Thread (void *pvParameters){
 					ucMinutes = 0;
 				}
 				sWatch.eTimeUnit=MINUTES;
-				sWatch.TmeValue = ucMinutes;
+				sWatch.TimeValue = ucMinutes;
 				xQueueSendToBack(xWatchQueue, &sWatch, SEND_TO_QUEUE_DELAY);
 			}
 			sWatch.eTimeUnit=SECONDS;
-			sWatch.TmeValue = ucSeconds;
+			sWatch.TimeValue = ucSeconds;
 			xQueueSendToBack(xWatchQueue, &sWatch, SEND_TO_QUEUE_DELAY);
 			vTaskDelay(100);
 	}
@@ -48,10 +48,10 @@ void Watch_Init(){
 	
 	xWatchQueue = xQueueCreate(QUEUE_LENGTH, QUEUE_ITEM_SIZE);
 	sWatch.eTimeUnit = MINUTES;
-	sWatch.TmeValue = 0;
+	sWatch.TimeValue = 0;
 	xQueueSendToBack(xWatchQueue, &sWatch, SEND_TO_QUEUE_DELAY);
 	sWatch.eTimeUnit = SECONDS;
-	sWatch.TmeValue = 0;
+	sWatch.TimeValue = 0;
 	xQueueSendToBack(xWatchQueue, &sWatch, SEND_TO_QUEUE_DELAY);
 	
 	xTaskCreate(Watch_Thread, NULL, 128, NULL, 1, NULL );

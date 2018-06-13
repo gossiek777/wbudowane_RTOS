@@ -70,8 +70,8 @@ __irq void UART0_Interrupt (void) {
    VICVectAddr = 0; // Acknowledge Interrupt
 }
 
-////////////////////////////////////////////
-/*
+////////////////////////////////////////////Baudrate standard
+
 void UART_InitWithInt(unsigned int uiBaudRate){
 
    // UART0
@@ -86,7 +86,10 @@ void UART_InitWithInt(unsigned int uiBaudRate){
    VICVectCntl2  = mIRQ_SLOT_ENABLE | VIC_UART0_CHANNEL_NR;     // use it for UART 0 Interrupt
    VICIntEnable |= (0x1 << VIC_UART0_CHANNEL_NR);               // Enable UART 0 Interrupt Channel
 }
-*/
+
+
+//////////////////////////////////////////// Baudrate = 300
+/*
 void UART_InitWithInt(unsigned int uiBaudRate){
 	
 	unsigned long ulDivisor, ulWantedClock;
@@ -108,6 +111,9 @@ void UART_InitWithInt(unsigned int uiBaudRate){
 	VICIntEnable |= (0x1 << VIC_UART0_CHANNEL_NR);               // Enable UART 0 Interrupt Channel
 
 }
+
+*/
+
 void Reciever_PutCharacterToBuffer(char cCharacter){
 	if (sBuffer.ucCharCtr < RECIEVER_SIZE){	
 		if (cCharacter != TERMINATOR){
