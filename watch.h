@@ -1,4 +1,4 @@
-enum TimeUnit {SECCONDS, MINUTES};
+enum TimeUnit {SECONDS, MINUTES};
 
 struct WatchEvent {
 	enum TimeUnit eTimeUnit;

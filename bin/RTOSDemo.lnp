@@ -7,6 +7,7 @@
 ".\bin\keyboard.o"
 ".\bin\servo.o"
 ".\bin\timer_interrupts.o"
+".\bin\watch.o"
 ".\bin\tasks.o"
 ".\bin\list.o"
 ".\bin\queue.o"

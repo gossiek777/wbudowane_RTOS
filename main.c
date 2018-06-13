@@ -1,44 +1,24 @@
 #include "FreeRTOS.h"
 #include "task.h"
-#include "keyboard.h"
+#include "watch.h"
 #include "led.h"
 
-void Delay(unsigned int uiMiliSec) {
-	unsigned int uiLoopCtr, uiDelayLoopCount;
-	uiDelayLoopCount = uiMiliSec*12000;
-	for(uiLoopCtr = 0; uiLoopCtr < uiDelayLoopCount; uiLoopCtr++) {}
-}
 
-void Button_To_Led(void *pvParameters){
-	enum ButtonState eButton;
-	
+void WatchEvent_To_Led(void *pvParameters){
+	struct WatchEvent sWatch;
 	while(1){
-		eButton = eKeyboard_Read();
-		//eButton = eReadButtons();
-		switch(eButton){
-			case(BUTTON_0):
-				Led_On(0);
-				break;
-			case(BUTTON_1):
-				Led_On(1);
-				break;
-			case(BUTTON_2):
-				Led_On(2);
-				break;
-			case(BUTTON_3):
-				Led_On(3);
-				break;
-			default:
-				break;
-		}
-		vTaskDelay(100);
+		sWatch = sWatch_Read();
+		if(sWatch.eTimeUnit == SECONDS)
+			Led_Toggle(0);
+		else
+			Led_Toggle(1);
+		vTaskDelay(50);
 	}
 }
-
 int main( void ){
 
-	Keyboard_Init();
 	Led_Init();
-	xTaskCreate(Button_To_Led, NULL, 128, NULL, 1, NULL);
+	Watch_Init();
+	xTaskCreate(WatchEvent_To_Led, NULL, 128, NULL, 1, NULL);
 	vTaskStartScheduler();	
 }
