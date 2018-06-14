@@ -3,6 +3,7 @@
 #include "string.h"
 #include "FreeRTOS.h"
 #include "queue.h"
+#include "semphr.h"
 
 /************ UART ************/
 //pin control register
@@ -36,6 +37,7 @@ char cOdebranyZnak;
 
 xQueueHandle xUART_RX_Queue;
 xQueueHandle xUART_TX_Queue;
+xSemaphoreHandle xUART_TX_Sem;
 
 ///////////////////////////////////////////
 __irq void UART0_Interrupt (void) {
@@ -54,8 +56,10 @@ __irq void UART0_Interrupt (void) {
 		 xQueueReceiveFromISR(xUART_TX_Queue, &cCharToSend, NULL);
 			if(cCharToSend !=NULL)
 				U0THR = cCharToSend;
-			else if (cCharToSend ==NULL)
+			else if (cCharToSend ==NULL){
 				U0THR = '\r';
+				xSemaphoreGiveFromISR(xUART_TX_Sem, NULL);
+			}
 		}
 
    VICVectAddr = 0; // Acknowledge Interrupt
@@ -79,6 +83,8 @@ void UART_InitWithInt(unsigned int uiBaudRate){
 
 	xUART_RX_Queue = xQueueCreate(UART_RX_BUFFER_SIZE,sizeof(char));
 	xUART_TX_Queue = xQueueCreate(UART_TX_BUFFER_SIZE,sizeof(char));
+	xUART_TX_Sem = xSemaphoreCreateBinary();
+	xSemaphoreGive(xUART_TX_Sem);
 }
 
 ////////////////////////Version for low BaudRate (300)
@@ -139,5 +145,6 @@ void Uart_PutString(char *acStringToSend){
 		ucCounter++;
 	}
 	xQueueSendToBack(xUART_TX_Queue, &acStringToSend[ucCounter], SEND_TO_QUEUE_DELAY);
+	xSemaphoreTake(xUART_TX_Sem, portMAX_DELAY);
 	U0THR = cFristChar;
 }

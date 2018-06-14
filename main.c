@@ -6,9 +6,23 @@
 
 void UartRx( void *pvParameters ){
 	char acBuffer[UART_RX_BUFFER_SIZE];
+	acBuffer[0]=NULL;
+	AppendString("0123456789\n", acBuffer);
 	while(1){
-		Uart_GetString(acBuffer);
+		/*
+		vTaskDelay(500);
 		Uart_PutString(acBuffer);
+		Uart_PutString(acBuffer);
+		Uart_PutString(acBuffer);
+		*/
+		
+		vTaskDelay(500);
+		Uart_PutString(acBuffer);
+		vTaskDelay(10);
+		Uart_PutString(acBuffer);
+		vTaskDelay(10);
+		Uart_PutString(acBuffer);
+		
 	}
 }
 int main( void ){

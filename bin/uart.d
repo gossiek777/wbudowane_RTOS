@@ -13,3 +13,4 @@
 .\bin\uart.o: ..\..\Source\include\..\..\Source\portable\RVDS\ARM7_LPC21xx\portmacro.h
 .\bin\uart.o: ..\..\Source\include\mpu_wrappers.h
 .\bin\uart.o: ..\..\Source\include\queue.h
+.\bin\uart.o: ..\..\Source\include\semphr.h
