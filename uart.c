@@ -52,16 +52,16 @@ __irq void UART0_Interrupt (void) {
    } 
    if ((uiCopyOfU0IIR & mINTERRUPT_PENDING_IDETIFICATION_BITFIELD) == mTHRE_INTERRUPT_PENDING)              // wyslano znak - nadajnik pusty 
    {
-		 char cCharToSend;
-		 xQueueReceiveFromISR(xUART_TX_Queue, &cCharToSend, NULL);
-			if(cCharToSend !=NULL)
-				U0THR = cCharToSend;
-			else if (cCharToSend ==NULL){
-				U0THR = '\r';
+			char cCharToSend;
+			if(pdPASS == xQueueReceiveFromISR(xUART_TX_Queue, &cCharToSend, NULL)){
+				if(cCharToSend !=NULL)
+					U0THR = cCharToSend;
+				else if (cCharToSend ==NULL){
+					U0THR = '\r';
 				xSemaphoreGiveFromISR(xUART_TX_Sem, NULL);
+				}
 			}
-		}
-
+		}	
    VICVectAddr = 0; // Acknowledge Interrupt
 }
 
