@@ -14,30 +14,32 @@ QueueHandle_t xUART_Queue;
 
 void Button_To_Led(void *pvParameters){
 	enum ButtonState eButton;
-	
+	enum ButtonState ePreviousButton = RELASED;
 	while(1){
 		eButton = eKeyboard_Read();
-		switch(eButton){
-			case(BUTTON_0):
-				Led_Off();
-				xQueueSendToBack(xUART_Queue,"button 0x0000",1);
-				break;
-			case(BUTTON_1):
-				Led_On(2);
-				xQueueSendToBack(xUART_Queue,"button 0x0001",1);
-				break;
-			case(BUTTON_2):
-				Led_On(3);
-				xQueueSendToBack(xUART_Queue,"button 0x0002",1);
-				break;
-			case(BUTTON_3):
-				Led_On(2);
-				Led_On(3);
-				xQueueSendToBack(xUART_Queue,"button 0x0003",1);
-				break;
-			default:
-				break;
+		if(eButton != ePreviousButton){
+			switch(eButton){
+				case(BUTTON_0):
+					Led_On(0);
+					xQueueSendToBack(xUART_Queue,"button 0x0000",1);
+					break;
+				case(BUTTON_1):
+					Led_On(1);
+					xQueueSendToBack(xUART_Queue,"button 0x0001",1);
+					break;
+				case(BUTTON_2):
+					Led_On(2);
+					xQueueSendToBack(xUART_Queue,"button 0x0002",1);
+					break;
+				case(BUTTON_3):
+					Led_On(3);
+					xQueueSendToBack(xUART_Queue,"button 0x0003",1);
+					break;
+				default:
+					break;
+			}
 		}
+		ePreviousButton=eButton;
 		vTaskDelay(10);
 	}
 }
@@ -66,9 +68,7 @@ void UART_Transmit_Msg(void *pvParameters){
 	char cMsg[15];
 	while(1){
 		xQueueReceive(xUART_Queue,&cMsg,portMAX_DELAY);
-		AppendString("\n",cMsg);
-		Transmiter_SendString(cMsg);
-		vTaskDelay(10);
+		Uart_PutString(cMsg);
 	}
 }
 
