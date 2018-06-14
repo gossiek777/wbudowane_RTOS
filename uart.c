@@ -29,8 +29,6 @@
 #define mIRQ_SLOT_ENABLE                           0x00000020
 
 
-char cOdebranyZnak;
-
 struct TransmiterBuffer{
 	char cData[TRANSMITER_SIZE];
 	enum eTransmiterStatus eStatus;
@@ -38,15 +36,15 @@ struct TransmiterBuffer{
 	unsigned char ucCharCtr;
 };
 
-struct TransmiterBuffer sTransmiterBuffer;
-
 struct RecieverBuffer{
 	char cData[RECIEVER_SIZE];
 	unsigned char ucCharCtr;
 	enum eRecieverStatus eStatus;
 };
 
+char cOdebranyZnak;
 struct RecieverBuffer sBuffer;
+struct TransmiterBuffer sTransmiterBuffer;
 
 
 ///////////////////////////////////////////
@@ -112,6 +110,7 @@ void UART_InitWithInt(unsigned int uiBaudRate){
 }
 */
 
+
 void Reciever_PutCharacterToBuffer(char cCharacter){
 	if (sBuffer.ucCharCtr < RECIEVER_SIZE){	
 		if (cCharacter != TERMINATOR){
@@ -140,6 +139,12 @@ void Uart_GetStringCopy(char * ucDestination) {
 	sBuffer.eStatus=EMPTY;
 }
 
+char cUart_GetChar(void){
+	return 'c';
+}
+
+
+//**************************** TRANSMITER FUNCTIONS ****************************///
 char Transmiter_GetCharacterFromBuffer(void){
 	
 	char cCurrentSign;

@@ -8,10 +8,9 @@ void UartRx( void *pvParameters ){
 	while(1){
 		enum eRecieverStatus eStatus = eUartRx_GetStatus();
 		while (eUartRx_GetStatus()==EMPTY){
-			Led_Off();
 		};
 		Uart_GetStringCopy(acBuffer);
-		Led_On(0);
+		Led_Toggle(0);
 	}
 }
 int main( void ){
