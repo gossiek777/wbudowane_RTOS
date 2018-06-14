@@ -1,6 +1,8 @@
 #include <LPC210X.H>
 #include "uart.h"
 #include "string.h"
+#include "FreeRTOS.h"
+#include "queue.h"
 
 /************ UART ************/
 //pin control register
@@ -46,6 +48,7 @@ char cOdebranyZnak;
 struct RecieverBuffer sBuffer;
 struct TransmiterBuffer sTransmiterBuffer;
 
+xQueueHandle xUARTQueue;
 
 ///////////////////////////////////////////
 __irq void UART0_Interrupt (void) {
@@ -56,7 +59,7 @@ __irq void UART0_Interrupt (void) {
    if ((uiCopyOfU0IIR & mINTERRUPT_PENDING_IDETIFICATION_BITFIELD) == mRX_DATA_AVALIABLE_INTERRUPT_PENDING) // odebrano znak
    {
       cOdebranyZnak = U0RBR;
-			Reciever_PutCharacterToBuffer(cOdebranyZnak);
+		 xQueueSendToBack(xUARTQueue, &cOdebranyZnak, 0);
    } 
    if ((uiCopyOfU0IIR & mINTERRUPT_PENDING_IDETIFICATION_BITFIELD) == mTHRE_INTERRUPT_PENDING)              // wyslano znak - nadajnik pusty 
    {
@@ -83,6 +86,8 @@ void UART_InitWithInt(unsigned int uiBaudRate){
    VICVectAddr2  = (unsigned long) UART0_Interrupt;             // set interrupt service routine address
    VICVectCntl2  = mIRQ_SLOT_ENABLE | VIC_UART0_CHANNEL_NR;     // use it for UART 0 Interrupt
    VICIntEnable |= (0x1 << VIC_UART0_CHANNEL_NR);               // Enable UART 0 Interrupt Channel
+
+	xUARTQueue = xQueueCreate(UART_RX_BUFFER_SIZE,sizeof(char));
 }
 
 ////////////////////////Version for low BaudRate (300)
@@ -111,6 +116,17 @@ void UART_InitWithInt(unsigned int uiBaudRate){
 */
 
 
+
+
+
+char cUart_GetChar(){
+	char cRecievedChar;
+	xQueueReceive(xUARTQueue, &cRecievedChar, portMAX_DELAY);
+	return cRecievedChar;
+}
+
+
+/*
 void Reciever_PutCharacterToBuffer(char cCharacter){
 	if (sBuffer.ucCharCtr < RECIEVER_SIZE){	
 		if (cCharacter != TERMINATOR){
@@ -130,6 +146,7 @@ void Reciever_PutCharacterToBuffer(char cCharacter){
 	}	
 }
 
+
 enum eRecieverStatus eUartRx_GetStatus(void) {
 	return sBuffer.eStatus;
 }
@@ -138,10 +155,8 @@ void Uart_GetStringCopy(char * ucDestination) {
 	CopyString(sBuffer.cData, ucDestination);
 	sBuffer.eStatus=EMPTY;
 }
+*/
 
-char cUart_GetChar(void){
-	return 'c';
-}
 
 
 //**************************** TRANSMITER FUNCTIONS ****************************///

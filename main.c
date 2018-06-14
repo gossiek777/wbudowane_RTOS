@@ -4,13 +4,12 @@
 #include "uart.h"
 
 void UartRx( void *pvParameters ){
-	char acBuffer[UART_RX_BUFFER_SIZE];
+	//char acBuffer[UART_RX_BUFFER_SIZE];
+	char c;
 	while(1){
-		enum eRecieverStatus eStatus = eUartRx_GetStatus();
-		while (eUartRx_GetStatus()==EMPTY){
-		};
-		Uart_GetStringCopy(acBuffer);
-		Led_Toggle(0);
+		c = cUart_GetChar()-'0';
+		Led_Toggle(c%4);
+		vTaskDelay(5);
 	}
 }
 int main( void ){
