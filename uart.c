@@ -59,7 +59,7 @@ __irq void UART0_Interrupt (void) {
    if ((uiCopyOfU0IIR & mINTERRUPT_PENDING_IDETIFICATION_BITFIELD) == mRX_DATA_AVALIABLE_INTERRUPT_PENDING) // odebrano znak
    {
       cOdebranyZnak = U0RBR;
-		 xQueueSendToBack(xUARTQueue, &cOdebranyZnak, 0);
+		 xQueueSendToBack(xUARTQueue, &cOdebranyZnak, 20);
    } 
    if ((uiCopyOfU0IIR & mINTERRUPT_PENDING_IDETIFICATION_BITFIELD) == mTHRE_INTERRUPT_PENDING)              // wyslano znak - nadajnik pusty 
    {

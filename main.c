@@ -8,7 +8,10 @@ void UartRx( void *pvParameters ){
 	char acBuffer[UART_RX_BUFFER_SIZE];
 	while(1){
 		Uart_GetString(acBuffer);
-		Led_Toggle((acBuffer[0]-'0')%4);
+		if (EQUAL == eCompareString(acBuffer, "zero"))
+			Led_Toggle(0);
+		else if (EQUAL == eCompareString(acBuffer, "jeden"))
+			Led_Toggle(1);
 	}
 }
 int main( void ){
