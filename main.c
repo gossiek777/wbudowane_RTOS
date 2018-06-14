@@ -2,14 +2,13 @@
 #include "task.h"
 #include "led.h"
 #include "uart.h"
+#include "string.h"
 
 void UartRx( void *pvParameters ){
-	//char acBuffer[UART_RX_BUFFER_SIZE];
-	char c;
+	char acBuffer[UART_RX_BUFFER_SIZE];
 	while(1){
-		c = cUart_GetChar()-'0';
-		Led_Toggle(c%4);
-		vTaskDelay(5);
+		Uart_GetString(acBuffer);
+		Led_Toggle((acBuffer[0]-'0')%4);
 	}
 }
 int main( void ){

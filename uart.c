@@ -124,7 +124,17 @@ char cUart_GetChar(){
 	xQueueReceive(xUARTQueue, &cRecievedChar, portMAX_DELAY);
 	return cRecievedChar;
 }
-
+void Uart_GetString(char *acDestination){
+	char cRecievedChar;
+	unsigned char ucCounter = 0;
+	xQueueReceive(xUARTQueue, &cRecievedChar, portMAX_DELAY);
+	while (cRecievedChar != TERMINATOR){
+		acDestination[ucCounter] = cRecievedChar;
+		ucCounter++;
+		xQueueReceive(xUARTQueue, &cRecievedChar, portMAX_DELAY);
+	}
+	acDestination[ucCounter] = NULL;
+}
 
 /*
 void Reciever_PutCharacterToBuffer(char cCharacter){
