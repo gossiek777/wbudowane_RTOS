@@ -30,25 +30,12 @@
 // VICVectCntlx Vector Control Registers
 #define mIRQ_SLOT_ENABLE                           0x00000020
 
-
-struct TransmiterBuffer{
-	char cData[TRANSMITER_SIZE];
-	enum eTransmiterStatus eStatus;
-	unsigned char fLastCharacter;
-	unsigned char ucCharCtr;
-};
-
-struct RecieverBuffer{
-	char cData[RECIEVER_SIZE];
-	unsigned char ucCharCtr;
-	enum eRecieverStatus eStatus;
-};
+#define SEND_TO_QUEUE_DELAY 20
 
 char cOdebranyZnak;
-struct RecieverBuffer sBuffer;
-struct TransmiterBuffer sTransmiterBuffer;
 
-xQueueHandle xUARTQueue;
+xQueueHandle xUART_RX_Queue;
+xQueueHandle xUART_TX_Queue;
 
 ///////////////////////////////////////////
 __irq void UART0_Interrupt (void) {
@@ -59,14 +46,17 @@ __irq void UART0_Interrupt (void) {
    if ((uiCopyOfU0IIR & mINTERRUPT_PENDING_IDETIFICATION_BITFIELD) == mRX_DATA_AVALIABLE_INTERRUPT_PENDING) // odebrano znak
    {
       cOdebranyZnak = U0RBR;
-		 xQueueSendToBack(xUARTQueue, &cOdebranyZnak, 20);
+		 xQueueSendToBackFromISR(xUART_RX_Queue, &cOdebranyZnak, NULL);
    } 
    if ((uiCopyOfU0IIR & mINTERRUPT_PENDING_IDETIFICATION_BITFIELD) == mTHRE_INTERRUPT_PENDING)              // wyslano znak - nadajnik pusty 
    {
-      if(sTransmiterBuffer.eStatus == BUSY){
-				U0THR = Transmiter_GetCharacterFromBuffer();
-			}
-   }
+		 char cCharToSend;
+		 xQueueReceiveFromISR(xUART_TX_Queue, &cCharToSend, NULL);
+			if(cCharToSend !=NULL)
+				U0THR = cCharToSend;
+			else if (cCharToSend ==NULL)
+				U0THR = '\r';
+		}
 
    VICVectAddr = 0; // Acknowledge Interrupt
 }
@@ -87,7 +77,8 @@ void UART_InitWithInt(unsigned int uiBaudRate){
    VICVectCntl2  = mIRQ_SLOT_ENABLE | VIC_UART0_CHANNEL_NR;     // use it for UART 0 Interrupt
    VICIntEnable |= (0x1 << VIC_UART0_CHANNEL_NR);               // Enable UART 0 Interrupt Channel
 
-	xUARTQueue = xQueueCreate(UART_RX_BUFFER_SIZE,sizeof(char));
+	xUART_RX_Queue = xQueueCreate(UART_RX_BUFFER_SIZE,sizeof(char));
+	xUART_TX_Queue = xQueueCreate(UART_TX_BUFFER_SIZE,sizeof(char));
 }
 
 ////////////////////////Version for low BaudRate (300)
@@ -118,88 +109,35 @@ void UART_InitWithInt(unsigned int uiBaudRate){
 
 
 
+//**************************** RECIEVER FUNCTIONS ****************************///
 
 char cUart_GetChar(){
 	char cRecievedChar;
-	xQueueReceive(xUARTQueue, &cRecievedChar, portMAX_DELAY);
+	xQueueReceive(xUART_RX_Queue, &cRecievedChar, portMAX_DELAY);
 	return cRecievedChar;
 }
 void Uart_GetString(char *acDestination){
 	char cRecievedChar;
 	unsigned char ucCounter = 0;
-	xQueueReceive(xUARTQueue, &cRecievedChar, portMAX_DELAY);
+	xQueueReceive(xUART_RX_Queue, &cRecievedChar, portMAX_DELAY);
 	while (cRecievedChar != TERMINATOR){
 		acDestination[ucCounter] = cRecievedChar;
 		ucCounter++;
-		xQueueReceive(xUARTQueue, &cRecievedChar, portMAX_DELAY);
+		xQueueReceive(xUART_RX_Queue, &cRecievedChar, portMAX_DELAY);
 	}
 	acDestination[ucCounter] = NULL;
 }
 
-/*
-void Reciever_PutCharacterToBuffer(char cCharacter){
-	if (sBuffer.ucCharCtr < RECIEVER_SIZE){	
-		if (cCharacter != TERMINATOR){
-			sBuffer.cData[sBuffer.ucCharCtr] = cCharacter;
-			sBuffer.ucCharCtr++;
-			sBuffer.eStatus = EMPTY;
-		}
-		else{
-			sBuffer.cData[sBuffer.ucCharCtr] = NULL;
-			sBuffer.eStatus = READY;
-			sBuffer.ucCharCtr = 0;
-		}
-	}
-	else{
-		sBuffer.eStatus = OVERFLOW;
-		sBuffer.ucCharCtr = 0;
-	}	
-}
-
-
-enum eRecieverStatus eUartRx_GetStatus(void) {
-	return sBuffer.eStatus;
-}
-
-void Uart_GetStringCopy(char * ucDestination) {
-	CopyString(sBuffer.cData, ucDestination);
-	sBuffer.eStatus=EMPTY;
-}
-*/
-
-
 
 //**************************** TRANSMITER FUNCTIONS ****************************///
-char Transmiter_GetCharacterFromBuffer(void){
-	
-	char cCurrentSign;
-	
-	cCurrentSign = sTransmiterBuffer.cData[sTransmiterBuffer.ucCharCtr];
 
-	if(cCurrentSign == NULL){
-		if(sTransmiterBuffer.fLastCharacter==0){
-			sTransmiterBuffer.fLastCharacter=1;
-			return(TERMINATOR);
-		}
-		else{
-			sTransmiterBuffer.fLastCharacter=0;
-			sTransmiterBuffer.eStatus=FREE;
-			return(NULL);
-		}
+void Uart_PutString(char *acStringToSend){
+	char cFristChar = acStringToSend[0];
+	unsigned char ucCounter=1;
+	while(acStringToSend[ucCounter] != NULL){
+		xQueueSendToBack(xUART_TX_Queue, &acStringToSend[ucCounter], SEND_TO_QUEUE_DELAY);
+		ucCounter++;
 	}
-	else{
-		sTransmiterBuffer.ucCharCtr++;
-		return(cCurrentSign);
-	}	
-}
-
-void Transmiter_SendString(char cString[]){
-	sTransmiterBuffer.eStatus = BUSY;
-	sTransmiterBuffer.ucCharCtr = 0;
-	CopyString(cString, sTransmiterBuffer.cData);
-	U0THR = Transmiter_GetCharacterFromBuffer();
-}
-
-enum eTransmiterStatus Transmiter_GetStatus(void){
-	return sTransmiterBuffer.eStatus;
+	xQueueSendToBack(xUART_TX_Queue, &acStringToSend[ucCounter], SEND_TO_QUEUE_DELAY);
+	U0THR = cFristChar;
 }
