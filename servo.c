@@ -105,7 +105,7 @@ void Automat(void *pvParameters){
 }
 
 void ServoInit(){
-	xTaskCreate(Automat, NULL, 512, NULL, 3, NULL);
+	//xTaskCreate(Automat, NULL, 512, NULL, 3, NULL);
 	xServoQueue = xQueueCreate(QUEUE_LENGTH, QUEUE_ITEM_SIZE);
 	Led_Init();
 	DetectorInit();

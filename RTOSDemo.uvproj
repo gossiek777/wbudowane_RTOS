@@ -437,6 +437,11 @@
               <FileType>1</FileType>
               <FilePath>.\watch.c</FilePath>
             </File>
+            <File>
+              <FileName>command_decoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\command_decoder.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -906,6 +911,11 @@
               <FileName>watch.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\watch.c</FilePath>
+            </File>
+            <File>
+              <FileName>command_decoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\command_decoder.c</FilePath>
             </File>
           </Files>
         </Group>

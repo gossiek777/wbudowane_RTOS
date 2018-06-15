@@ -8,6 +8,7 @@
 ".\bin\servo.o"
 ".\bin\timer_interrupts.o"
 ".\bin\watch.o"
+".\bin\command_decoder.o"
 ".\bin\tasks.o"
 ".\bin\list.o"
 ".\bin\queue.o"

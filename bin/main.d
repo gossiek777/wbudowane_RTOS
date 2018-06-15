@@ -12,8 +12,9 @@
 .\bin\main.o: ..\..\Source\include\task.h
 .\bin\main.o: ..\..\Source\include\list.h
 .\bin\main.o: ..\..\Source\include\queue.h
-.\bin\main.o: watch.h
 .\bin\main.o: keyboard.h
 .\bin\main.o: led.h
 .\bin\main.o: string.h
 .\bin\main.o: uart.h
+.\bin\main.o: command_decoder.h
+.\bin\main.o: servo.h
