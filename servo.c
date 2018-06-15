@@ -9,6 +9,7 @@
 #define DETECTOR_OUT_bm (1<<10)
 #define QUEUE_LENGTH 		25
 #define QUEUE_ITEM_SIZE sizeof(struct ServoMsg)
+#define SEND_TO_QUEUE_DELAY 10
 
 QueueHandle_t xServoQueue;
 extern TaskHandle_t xHandle;
@@ -57,18 +58,21 @@ void Automat(void *pvParameters){
 			case IDLE:
 				if(xQueueReceive(xServoQueue, &sServoMsg, portMAX_DELAY) == pdPASS){
 					switch(sServoMsg.eStateCmd){
+						case(CAL):
+							sServo.eState=CALLIB;
+							break;
 						case(GO_TO):
 							sServo.uiDesiredPosition=sServoMsg.uiArgumentValue;
 							sServo.eState=IN_PROGRESS;
-						break;
+							break;
 						case(WAIT):
 							sServo.uiDelay=sServoMsg.uiArgumentValue;
-						break;
+							break;
 						case(SPEED):
 							sServo.uiDelay=sServoMsg.uiArgumentValue;
-						break;
+							break;
 						default:
-						break;
+							break;
 					}
 				}
 				break;
@@ -105,7 +109,7 @@ void Automat(void *pvParameters){
 }
 
 void ServoInit(){
-	//xTaskCreate(Automat, NULL, 512, NULL, 3, NULL);
+	xTaskCreate(Automat, NULL, 512, NULL, 3, NULL);
 	xServoQueue = xQueueCreate(QUEUE_LENGTH, QUEUE_ITEM_SIZE);
 	Led_Init();
 	DetectorInit();

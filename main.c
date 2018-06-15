@@ -9,7 +9,7 @@
 #include "servo.h"
 
 
-#define QUEUE_LENGTH 			25
+#define QUEUE_LENGTH 			5
 #define QUEUE_ITEM_SIZE 	20
 
 QueueHandle_t xCommon_Queue;
@@ -42,7 +42,6 @@ void Button_To_Led(void *pvParameters){
 			}
 		}
 		ePreviousButton=eButton;
-		vTaskDelay(10);
 	}
 }
 
@@ -64,10 +63,12 @@ void Executor (void *pvParameters){
 				switch (asToken[0].uValue.eKeyword){
 					case CALLIB:
 						ServoCallib();
+						Uart_PutString("CALLIB");
 						break;
 					
 					case GOTO:
 						if (asToken[1].eType == NUMBER){
+							Uart_PutString("GO_TO");
 							ServoGoTo(asToken[1].uValue.uiNumber);
 						}
 						break;
@@ -82,20 +83,20 @@ void Executor (void *pvParameters){
 						if (asToken[1].eType == NUMBER){
 							switch(asToken[1].uValue.uiNumber){
 								case 0:
+									ServoCallib();
 									Uart_PutString("BUT_0");
-									//ServoCallib();
 									break;
 								case 1:
+									ServoGoTo(12);
 									Uart_PutString("BUT_1");
-									//ServoGoTo(12);
 									break;
 								case 2:
+									ServoGoTo(24);
 									Uart_PutString("BUT_2");
-								//ServoGoTo(24);
 									break;
 								case 3:
+									ServoGoTo(36);
 									Uart_PutString("BUT_3");
-									//ServoGoTo(36);
 									break;
 								default:
 									break;
@@ -104,23 +105,23 @@ void Executor (void *pvParameters){
 						break;
 						
 					default:
-						Uart_PutString("Unknown command");
 						break;
 			}
 		}
-		vTaskDelay(10);
+		else{
+			Uart_PutString("Unknown command");
+		}
 	}
 }
 
 int main(){
 	Led_Init();
 	Keyboard_Init();
-	//ServoInit();
+	ServoInit();
 	UART_InitWithInt(9600);
 	xCommon_Queue = xQueueCreate(QUEUE_LENGTH, QUEUE_ITEM_SIZE);
 	xTaskCreate(Button_To_Led, NULL, 128, NULL, 1, NULL);
 	xTaskCreate(UART_Recieve_Msg, NULL, 128, NULL, 1, NULL);
 	xTaskCreate(Executor, NULL, 128, NULL, 1, NULL);
-	//xTaskCreate(Automat, NULL, 512, NULL, 3, NULL);
 	vTaskStartScheduler();	
 }
