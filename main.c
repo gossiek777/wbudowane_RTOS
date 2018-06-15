@@ -55,10 +55,12 @@ void UART_Recieve_Msg(void *pvParameters){
 
 void Executor (void *pvParameters){
 	char cEvent[UART_RX_BUFFER_SIZE];
-	char cID_Str [20];
+	char cString [30];
+	struct ServoStatus sServoStatus;
 	while(1){
 		xQueueReceive(xCommon_Queue,&cEvent,portMAX_DELAY);
 		DecodeMsg(cEvent);
+		cString[0]=NULL;
 		if ((ucTokenNr > 0) && (asToken[0].eType == KEYWORD)){
 				switch (asToken[0].uValue.eKeyword){
 					case CALLIB:
@@ -74,9 +76,7 @@ void Executor (void *pvParameters){
 						break;
 					
 					case ID:
-						cID_Str[0]=NULL;
-						CopyString("id: 0x0029",cID_Str); 
-						Uart_PutString(cID_Str);
+						Uart_PutString("id: 0x0029");
 						break;
 					
 					case BUTTON:
@@ -87,21 +87,49 @@ void Executor (void *pvParameters){
 									Uart_PutString("BUT_0");
 									break;
 								case 1:
-									ServoGoTo(12);
+									ServoWait(12);
 									Uart_PutString("BUT_1");
 									break;
 								case 2:
-									ServoGoTo(24);
+									ServoWait(10);
 									Uart_PutString("BUT_2");
 									break;
 								case 3:
+									ServoSpeed(8);
+									ServoGoTo(12);
+									ServoWait(50);
+									ServoGoTo(24);
+									ServoWait(50);
 									ServoGoTo(36);
+									ServoWait(100);
+									ServoGoTo(0);
 									Uart_PutString("BUT_3");
 									break;
 								default:
 									break;
 							}
 						}
+						break;
+					case STATE:
+						sServoStatus = Servo_State();
+						switch (sServoStatus.eState){
+							case _CALLIBRATION : 
+								CopyString("state callib ",cString); 
+								break;
+							case _IDDLE : 
+								CopyString("state iddle ",cString); 
+								break;
+							case _IN_PROGRESS : 
+								CopyString("state in_proggres ",cString); 
+								break;
+							case _WAITING : 
+								CopyString("state waiting ",cString); 
+								break;
+							default:
+								break;
+						};
+						AppendUIntToString(sServoStatus.uiPosition, cString);
+						Uart_PutString(cString);
 						break;
 						
 					default:

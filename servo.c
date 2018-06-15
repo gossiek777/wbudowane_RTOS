@@ -12,7 +12,8 @@
 #define SEND_TO_QUEUE_DELAY 10
 
 QueueHandle_t xServoQueue;
-extern TaskHandle_t xHandle;
+QueueHandle_t xServoStatusQueue;
+//extern TaskHandle_t xHandle;
 
 enum ServoStateCmd {CAL, GO_TO, WAIT, SPEED};
 enum ServoState {CALLIB, IDLE, IN_PROGRESS};
@@ -49,7 +50,8 @@ enum DetectorState eReadDetector (void){
 void Automat(void *pvParameters){
 	struct Servo sServo;
 	struct ServoMsg sServoMsg;
-	sServo.uiDelay=1;
+	struct  ServoStatus sServoStatus;
+	sServo.uiDelay=8;
 	sServo.eState=CALLIB;
 	
 	while(1){
@@ -60,13 +62,16 @@ void Automat(void *pvParameters){
 					switch(sServoMsg.eStateCmd){
 						case(CAL):
 							sServo.eState=CALLIB;
+							sServoStatus.eState = _CALLIBRATION;
 							break;
 						case(GO_TO):
 							sServo.uiDesiredPosition=sServoMsg.uiArgumentValue;
 							sServo.eState=IN_PROGRESS;
+							sServoStatus.eState = _IN_PROGRESS;
 							break;
 						case(WAIT):
-							sServo.uiDelay=sServoMsg.uiArgumentValue;
+							vTaskDelay(sServoMsg.uiArgumentValue);
+							sServoStatus.eState = _WAITING;
 							break;
 						case(SPEED):
 							sServo.uiDelay=sServoMsg.uiArgumentValue;
@@ -75,28 +80,34 @@ void Automat(void *pvParameters){
 							break;
 					}
 				}
+
 				break;
 			case IN_PROGRESS: 
 				if(sServo.uiCurrentPosition > sServo.uiDesiredPosition){
-					Led_StepLeft();
 					sServo.eState = IN_PROGRESS;
+					sServoStatus.eState = _IN_PROGRESS;
+					Led_StepLeft();
 					sServo.uiCurrentPosition--;
 				}
 				else if(sServo.uiCurrentPosition < sServo.uiDesiredPosition){
 					sServo.eState = IN_PROGRESS;
+					sServoStatus.eState = _IN_PROGRESS;
 					Led_StepRight();
 					sServo.uiCurrentPosition++;
 				}
 				else{
+					sServoStatus.eState = _IDDLE;
 					sServo.eState = IDLE;
 				}
 				break;
 			case CALLIB: 
 				if(eReadDetector()==ACTIVE){
 					Led_StepRight();
+					sServoStatus.eState = _CALLIBRATION;
 				}
 				else{
 					sServo.eState = IDLE;
+					sServoStatus.eState = _IDDLE;
 					sServo.uiCurrentPosition = 0;
 					sServo.uiDesiredPosition = 0;				
 				}	
@@ -104,13 +115,17 @@ void Automat(void *pvParameters){
 			default:
 				break;
 		}
+		
 		vTaskDelay(sServo.uiDelay);
+		sServoStatus.uiPosition=sServo.uiCurrentPosition;
+		xQueueOverwrite(xServoStatusQueue,&sServoStatus);
 	}
 }
 
 void ServoInit(){
 	xTaskCreate(Automat, NULL, 512, NULL, 3, NULL);
 	xServoQueue = xQueueCreate(QUEUE_LENGTH, QUEUE_ITEM_SIZE);
+	xServoStatusQueue = xQueueCreate(1, sizeof(struct ServoStatus));
 	Led_Init();
 	DetectorInit();
 }
@@ -141,4 +156,10 @@ void ServoSpeed(unsigned int uiTicksPerStep){
 	sServoSpeed.eStateCmd=SPEED;
 	sServoSpeed.uiArgumentValue = uiTicksPerStep;
 	xQueueSendToBack(xServoQueue,&sServoSpeed,10);
+}
+
+struct ServoStatus Servo_State(){
+	struct ServoStatus sServoStatus;
+	xQueuePeek(xServoStatusQueue,&sServoStatus,portMAX_DELAY);
+	return sServoStatus;
 }
