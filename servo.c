@@ -70,8 +70,8 @@ void Automat(void *pvParameters){
 							sServoStatus.eState = _IN_PROGRESS;
 							break;
 						case(WAIT):
-							vTaskDelay(sServoMsg.uiArgumentValue);
 							sServoStatus.eState = _WAITING;
+							vTaskDelay(sServoMsg.uiArgumentValue);
 							break;
 						case(SPEED):
 							sServo.uiDelay=sServoMsg.uiArgumentValue;

@@ -17,29 +17,30 @@ QueueHandle_t xCommon_Queue;
 void Button_To_Led(void *pvParameters){
 	enum ButtonState eButton;
 	enum ButtonState ePreviousButton = RELASED;
+	char cButtonMsg[20];
+	char cButtonNum[10];
 	while(1){
 		eButton = eKeyboard_Read();
 		if(eButton != ePreviousButton){
 			switch(eButton){
 				case(BUTTON_0):
-					Led_On(0);
-					xQueueSendToBack(xCommon_Queue,"button 0x0000",1);
+					UIntToHexStr(0, cButtonNum);
 					break;
 				case(BUTTON_1):
-					Led_On(1);
-					xQueueSendToBack(xCommon_Queue,"button 0x0001",1);
+					UIntToHexStr(1, cButtonNum);
 					break;
 				case(BUTTON_2):
-					Led_On(2);
-					xQueueSendToBack(xCommon_Queue,"button 0x0002",1);
+					UIntToHexStr(2, cButtonNum);
 					break;
 				case(BUTTON_3):
-					Led_On(3);
-					xQueueSendToBack(xCommon_Queue,"button 0x0003",1);
+					UIntToHexStr(3, cButtonNum);
 					break;
 				default:
 					break;
 			}
+			CopyString("button ", cButtonMsg);
+			AppendString(cButtonNum, cButtonMsg);
+			xQueueSendToBack(xCommon_Queue, cButtonMsg, 1);
 		}
 		ePreviousButton=eButton;
 	}
@@ -65,34 +66,48 @@ void Executor (void *pvParameters){
 				switch (asToken[0].uValue.eKeyword){
 					case CALLIB:
 						ServoCallib();
-						Uart_PutString("CALLIB");
+						CopyString("callib_ok", cString);
 						break;
 					
 					case GOTO:
 						if (asToken[1].eType == NUMBER){
-							Uart_PutString("GO_TO");
 							ServoGoTo(asToken[1].uValue.uiNumber);
+							CopyString("goto_ok ", cString);
 						}
 						break;
 					
 					case ID:
-						Uart_PutString("id: 0x0029");
+						CopyString("id: 0x0029", cString);
+						break;
+					
+					case WAIT:
+						if (asToken[1].eType == NUMBER){
+							ServoWait(asToken[1].uValue.uiNumber);
+							CopyString("wait_ok ", cString);					
+						}
+						break;
+					
+					case SPEED:
+						if (asToken[1].eType == NUMBER){
+							ServoSpeed(asToken[1].uValue.uiNumber);
+							CopyString("speed_ok ", cString);
+						}
 						break;
 					
 					case BUTTON:
 						if (asToken[1].eType == NUMBER){
+							CopyString("button_ok ", cString);
 							switch(asToken[1].uValue.uiNumber){
 								case 0:
 									ServoCallib();
-									Uart_PutString("BUT_0");
 									break;
 								case 1:
-									ServoWait(12);
-									Uart_PutString("BUT_1");
+									ServoGoTo(12);
 									break;
 								case 2:
-									ServoWait(10);
-									Uart_PutString("BUT_2");
+									ServoGoTo(24);
+									ServoWait(200);
+									ServoGoTo(0);
 									break;
 								case 3:
 									ServoSpeed(8);
@@ -103,7 +118,6 @@ void Executor (void *pvParameters){
 									ServoGoTo(36);
 									ServoWait(100);
 									ServoGoTo(0);
-									Uart_PutString("BUT_3");
 									break;
 								default:
 									break;
@@ -129,12 +143,12 @@ void Executor (void *pvParameters){
 								break;
 						};
 						AppendUIntToString(sServoStatus.uiPosition, cString);
-						Uart_PutString(cString);
 						break;
 						
 					default:
 						break;
 			}
+			Uart_PutString(cString);
 		}
 		else{
 			Uart_PutString("Unknown command");

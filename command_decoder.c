@@ -7,6 +7,8 @@ struct Keyword asKeywordList[MAX_KEYWORD_NR]={
 		{ID, "id"},
 		{BUTTON, "button"},
 		{STATE, "state"},
+		{WAIT, "wait"},
+		{SPEED, "speed"},
 	};
 struct Token asToken[MAX_TOKEN_NR];
 unsigned char ucTokenNr;

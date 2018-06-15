@@ -1,9 +1,9 @@
 #define MAX_TOKEN_NR 3 
 #define MAX_KEYWORD_STRING_LTH 20 
-#define MAX_KEYWORD_NR 5
+#define MAX_KEYWORD_NR 7
 
 enum TokenType {KEYWORD, NUMBER, STRING};
-enum KeywordCode {ID, CALLIB, GOTO, BUTTON, STATE};
+enum KeywordCode {ID, CALLIB, GOTO, BUTTON, STATE, WAIT, SPEED};
 
 
 union TokenValue {
