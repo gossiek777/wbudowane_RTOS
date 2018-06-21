@@ -53,6 +53,7 @@ void Automat(void *pvParameters){
 	struct  ServoStatus sServoStatus;
 	sServo.uiDelay=8;
 	sServo.eState=CALLIB;
+	sServoStatus.eState = _CALLIBRATION;
 	
 	while(1){
 		
@@ -71,7 +72,9 @@ void Automat(void *pvParameters){
 							break;
 						case(WAIT):
 							sServoStatus.eState = _WAITING;
+							xQueueOverwrite(xServoStatusQueue,&sServoStatus);
 							vTaskDelay(sServoMsg.uiArgumentValue);
+							sServoStatus.eState = _IDDLE;
 							break;
 						case(SPEED):
 							sServo.uiDelay=sServoMsg.uiArgumentValue;
